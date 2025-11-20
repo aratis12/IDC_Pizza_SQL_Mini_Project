@@ -1,0 +1,80 @@
+Name,Email Address,AnswerQuery
+Arati Shinde,aratishinde12597@gmail.com,select distinct category from pizza_types;
+Arati Shinde,aratishinde12597@gmail.com,"select pizza_type_id,
+name,
+(case when ingredients is null then 'Missing Data' else ingredients end) as ingredients
+from pizza_types
+limit 5;"
+Arati Shinde,aratishinde12597@gmail.com,"
+
+select * 
+from pizzas
+where price IS NULL;"
+Arati Shinde,aratishinde12597@gmail.com,"select * 
+from orders
+where date= '2015-01-01';"
+Arati Shinde,aratishinde12597@gmail.com,"select * 
+from pizzas
+order by price desc;"
+Arati Shinde,aratishinde12597@gmail.com,"select * 
+from pizzas
+where size in ('L','XL');"
+Arati Shinde,aratishinde12597@gmail.com,"select * 
+from pizzas
+where price between '15.00' and '17.00';"
+Arati Shinde,aratishinde12597@gmail.com,"select * 
+from pizza_types
+where name like '% chicken%';"
+Arati Shinde,aratishinde12597@gmail.com,"select *
+from orders
+where date ='2015-02-15' or time >'20:00:00';"
+Arati Shinde,aratishinde12597@gmail.com,"select sum(quantity)
+from order_details;"
+Arati Shinde,aratishinde12597@gmail.com,"select avg(price)
+from pizzas;"
+Arati Shinde,aratishinde12597@gmail.com,"select od.order_id,
+sum(p.price)
+from order_details od
+join pizzas p
+on od.pizza_id= p.pizza_id
+group by od.order_id;"
+Arati Shinde,aratishinde12597@gmail.com,"select pt.category,
+sum(od.quantity)
+from pizza_types pt
+ left join pizzas p
+on pt.pizza_type_id= p.pizza_type_id
+  left join order_details od
+on p.pizza_id=od.pizza_id
+group by pt.category;"
+Arati Shinde,aratishinde12597@gmail.com,"select pt.category,
+sum(od.quantity) as total_quantity
+from pizza_types pt
+ left join pizzas p
+on pt.pizza_type_id= p.pizza_type_id
+  left join order_details od
+on p.pizza_id=od.pizza_id
+group by pt.category
+having total_quantity >5000;"
+Arati Shinde,aratishinde12597@gmail.com,"select od.order_id, p.pizza_id, pt.name
+from pizzas p
+left join order_details od
+on p.pizza_id = od.pizza_id
+left join pizza_types pt
+on p.pizza_type_id= pt.pizza_type_id
+where od.order_id is null;"
+Arati Shinde,aratishinde12597@gmail.com,"SELECT
+    s.pizza_type_id,
+    s.price AS small_price,
+    m.price AS medium_price,
+    l.price AS large_price,
+    m.price - s.price AS diff_small_to_medium,
+    l.price - m.price AS diff_medium_to_large,
+    l.price - s.price AS diff_small_to_large
+FROM pizzas s
+JOIN pizzas m
+    ON s.pizza_type_id = m.pizza_type_id
+   AND m.size = 'M'
+JOIN pizzas l
+    ON s.pizza_type_id = l.pizza_type_id
+   AND l.size = 'L'
+WHERE s.size = 'S';"
